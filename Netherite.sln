@@ -1,0 +1,22 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Netherite", "Netherite\Netherite.csproj", "{014CD344-544F-43F5-82FE-847C515F3004}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Netherite.Domain", "Netherite.Domain\Netherite.Domain.csproj", "{A8BE5AC1-1F47-41DF-AB15-9225EAA3C052}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{014CD344-544F-43F5-82FE-847C515F3004}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{014CD344-544F-43F5-82FE-847C515F3004}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{014CD344-544F-43F5-82FE-847C515F3004}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{014CD344-544F-43F5-82FE-847C515F3004}.Release|Any CPU.Build.0 = Release|Any CPU
+		{A8BE5AC1-1F47-41DF-AB15-9225EAA3C052}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{A8BE5AC1-1F47-41DF-AB15-9225EAA3C052}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{A8BE5AC1-1F47-41DF-AB15-9225EAA3C052}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{A8BE5AC1-1F47-41DF-AB15-9225EAA3C052}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+EndGlobal

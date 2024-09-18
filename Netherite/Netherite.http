@@ -1,0 +1,6 @@
+@Netherite_HostAddress = http://localhost:5241
+
+GET {{Netherite_HostAddress}}/weatherforecast/
+Accept: application/json
+
+###

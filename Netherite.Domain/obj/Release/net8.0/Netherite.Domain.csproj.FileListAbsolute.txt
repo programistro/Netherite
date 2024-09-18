@@ -1,0 +1,11 @@
+C:\Users\katana\RiderProjects\Netherite\Netherite.Domain\bin\Release\net8.0\Netherite.Domain.deps.json
+C:\Users\katana\RiderProjects\Netherite\Netherite.Domain\bin\Release\net8.0\Netherite.Domain.dll
+C:\Users\katana\RiderProjects\Netherite\Netherite.Domain\bin\Release\net8.0\Netherite.Domain.pdb
+C:\Users\katana\RiderProjects\Netherite\Netherite.Domain\obj\Release\net8.0\Netherite.Domain.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\katana\RiderProjects\Netherite\Netherite.Domain\obj\Release\net8.0\Netherite.Domain.AssemblyInfoInputs.cache
+C:\Users\katana\RiderProjects\Netherite\Netherite.Domain\obj\Release\net8.0\Netherite.Domain.AssemblyInfo.cs
+C:\Users\katana\RiderProjects\Netherite\Netherite.Domain\obj\Release\net8.0\Netherite.Domain.csproj.CoreCompileInputs.cache
+C:\Users\katana\RiderProjects\Netherite\Netherite.Domain\obj\Release\net8.0\Netherite.Domain.dll
+C:\Users\katana\RiderProjects\Netherite\Netherite.Domain\obj\Release\net8.0\refint\Netherite.Domain.dll
+C:\Users\katana\RiderProjects\Netherite\Netherite.Domain\obj\Release\net8.0\Netherite.Domain.pdb
+C:\Users\katana\RiderProjects\Netherite\Netherite.Domain\obj\Release\net8.0\ref\Netherite.Domain.dll
