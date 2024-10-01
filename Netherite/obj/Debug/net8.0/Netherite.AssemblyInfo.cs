@@ -14,7 +14,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("Netherite")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+bfd6a767dd5d3d4d8cd4e1772a8578c074f2f4f4")]
 [assembly: System.Reflection.AssemblyProductAttribute("Netherite")]
 [assembly: System.Reflection.AssemblyTitleAttribute("Netherite")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]

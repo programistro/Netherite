@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Mvc;
 using Netherite.Contracts;
 using Netherite.Domain;
 using Netherite.Interface;
@@ -6,6 +7,7 @@ using Netherite.Service;
 
 namespace Netherite.Controllers;
 
+[Authorize]
 [ApiController]
   [Route("[controller]")]
   public class OrderController : ControllerBase
@@ -33,11 +35,11 @@ namespace Netherite.Controllers;
         Order order = Order.Create(Guid.NewGuid(), userId, request.CurrencyPairsId, request.Bet, 0M, DateTime.UtcNow, DateTime.UtcNow, request.PurchaseDirection, false);
         DateTime order1 = await this._orderServices.CreateOrder(userId, interval, order);
         this._orderBackgroundService.ProcessOrderAsync(order.Id, interval, interestRate);
-        return (ActionResult<Guid>) (ActionResult) this.Ok((object) order.Id);
+        return Ok(order.Id);
       }
       catch (Exception ex)
       {
-        return (ActionResult<Guid>) (ActionResult) this.BadRequest((object) ex.Message);
+        return (ActionResult) this.BadRequest(ex.Message);
       }
     }
 
@@ -50,13 +52,13 @@ namespace Netherite.Controllers;
       {
         List<Order> orders = await this._orderServices.GetOrders(userId);
         if (orders == null)
-          return (ActionResult<List<OrderResponse>>) (ActionResult) this.NotFound();
-        IEnumerable<OrderResponse> response = orders.Select<Order, OrderResponse>((Func<Order, OrderResponse>) (t => new OrderResponse(t.Id, t.UserId, t.CurrencyPairsId, t.Bet, t.StartPrice, t.StartTime, t.EndTime, t.PurchaseDirection, t.Ended)));
-        return (ActionResult<List<OrderResponse>>) (ActionResult) this.Ok((object) response);
+          return NotFound();
+        IEnumerable<OrderResponse> response = orders.Select(t => new OrderResponse(t.Id, t.UserId, t.CurrencyPairsId, t.Bet, t.StartPrice, t.StartTime, t.EndTime, t.PurchaseDirection, t.Ended));
+        return Ok(response);
       }
       catch (Exception ex)
       {
-        return (ActionResult<List<OrderResponse>>) (ActionResult) this.BadRequest((object) ex.Message);
+        return BadRequest(ex.Message);
       }
     }
   }

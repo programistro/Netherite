@@ -49,6 +49,9 @@ using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Reflection;
+using System.Text;
+using Microsoft.AspNetCore.Authentication.JwtBearer;
+using Microsoft.IdentityModel.Tokens;
 using Netherite.Data;
 using Netherite.Interface;
 using Netherite.Repository;
@@ -59,8 +62,54 @@ WebApplicationBuilder builder = WebApplication.CreateBuilder(args);
 CorsServiceCollectionExtensions.AddCors(builder.Services, (Action<CorsOptions>) (options => options.AddDefaultPolicy((Action<CorsPolicyBuilder>) (policy => policy.AllowAnyOrigin().AllowAnyMethod().AllowAnyHeader()))));
 MvcServiceCollectionExtensions.AddControllers(builder.Services);
 EndpointMetadataApiExplorerServiceCollectionExtensions.AddEndpointsApiExplorer(builder.Services);
+
+builder.Services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
+  .AddJwtBearer(options =>
+  {
+    options.TokenValidationParameters = new TokenValidationParameters
+    {
+      ValidateIssuer = true,
+      ValidIssuer = AuthOptions.ISSUER,
+      ValidateAudience = true,
+      ValidAudience = AuthOptions.AUDIENCE,
+      ValidateLifetime = true,
+      IssuerSigningKey = AuthOptions.GetSymmetricSecurityKey(),
+      ValidateIssuerSigningKey = true
+    };
+  });
+
 SwaggerGenServiceCollectionExtensions.AddSwaggerGen(builder.Services, (Action<SwaggerGenOptions>) (c =>
 {
+  c.AddSecurityDefinition("Bearer", new OpenApiSecurityScheme
+  {
+    Description = @"JWT Authorization header using the Bearer scheme. \r\n\r\n 
+                      Enter 'Bearer' [space] and then your token in the text input below.
+                      \r\n\r\nExample: 'maxSecurityPassword228'",
+    Name = "Authorization",
+    In = ParameterLocation.Header,
+    Type = SecuritySchemeType.ApiKey,
+    // Scheme = "Bearer"
+  });
+  
+  c.AddSecurityRequirement(new OpenApiSecurityRequirement()
+  {
+    {
+      new OpenApiSecurityScheme
+      {
+        Reference = new OpenApiReference
+        {
+          Type = ReferenceType.SecurityScheme,
+          Id = "Bearer"
+        },
+        // Scheme = "oauth2",
+        // Name = "Bearer",
+        // In = ParameterLocation.Header,
+
+      },
+      new List<string>()
+    }
+  });
+  
   SwaggerGenOptionsExtensions.SwaggerDoc(c, "v1", new OpenApiInfo()
   {
     Version = "v1",
@@ -99,6 +148,10 @@ WebApplication webApplication = builder.Build();
 if (!Directory.Exists("storage"))
   Directory.CreateDirectory("storage");
 WebApplication app = webApplication;
+
+app.UseAuthentication();
+app.UseAuthorization();
+
 StaticFileOptions options1 = new StaticFileOptions();
 options1.FileProvider = (IFileProvider) new PhysicalFileProvider(Path.Combine(builder.Environment.ContentRootPath, "storage"));
 options1.RequestPath = (PathString) "/storage";
@@ -113,3 +166,11 @@ AuthorizationAppBuilderExtensions.UseAuthorization(webApplication);
 ControllerEndpointRouteBuilderExtensions.MapControllers(webApplication);
 webApplication.Run();
 
+public class AuthOptions
+{
+  public const string ISSUER = "MyAuthServer"; // издатель токена
+  public const string AUDIENCE = "MyAuthClient"; // потребитель токена
+  const string KEY = "mysupersecret_secretsecretsecretkey!123";   // ключ для шифрации
+  public static SymmetricSecurityKey GetSymmetricSecurityKey() => 
+    new SymmetricSecurityKey(Encoding.UTF8.GetBytes(KEY));
+}

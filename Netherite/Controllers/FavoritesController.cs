@@ -1,10 +1,12 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Mvc;
 using Netherite.Contracts;
 using Netherite.Domain;
 using Netherite.Interface;
 
 namespace Netherite.Controllers;
 
+[Authorize]
 [ApiController]
   [Route("[controller]")]
   public class FavoritesController : ControllerBase

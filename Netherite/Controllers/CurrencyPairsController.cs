@@ -1,4 +1,5 @@
 ﻿using System.Runtime.CompilerServices;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Netherite.Contracts;
 using Netherite.Data;
@@ -7,6 +8,7 @@ using Netherite.Interface;
 
 namespace Netherite.Controllers;
 
+[Authorize]
 [ApiController]
 [Route("[controller]")]
 public class CurrencyPairsController : ControllerBase
@@ -23,6 +25,7 @@ public class CurrencyPairsController : ControllerBase
 
   /// <summary>Получение списка валютных пар</summary>
   [HttpGet]
+  [Authorize]
   public async Task<ActionResult<List<CurrencyPairsResponse>>> GetCurrencyPairs()
   {
     try
@@ -145,6 +148,7 @@ public class CurrencyPairsController : ControllerBase
     }
   }
 
+  [HttpPut("update-icon-pair")]
   public async Task<IActionResult> UpdateIconCurrencyPairs(Guid id, IFormFile file)
   {
     var pair = _context.CurrencyPairs.FirstOrDefault(x => x.Id == id);
